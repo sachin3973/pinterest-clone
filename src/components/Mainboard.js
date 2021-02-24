@@ -1,16 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import Pin from "./Pin";
+import "./Mainboard.css";
 
 function MainBoard(props) {
   let { pins } = props;
 
   return (
     <Wrapper>
-      <Container>
-        {pins.map((pin) => {
+      <Container className="mainboard__container">
+        {pins.map((pin, index) => {
           let { urls } = pin;
-          return <Pin urls={urls} />;
+          return <Pin key={index} urls={urls} />;
         })}
       </Container>
     </Wrapper>
@@ -28,6 +29,9 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  height: 300px;
-  width: 80%;
+  column-count: 5;
+  column-gap: 10px;
+  margin: 0 auto;
+  height: 100%;
+  max-width: 1260px;
 `;

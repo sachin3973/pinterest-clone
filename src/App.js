@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Mainboard from "./components/Mainboard";
 import unsplash from "./api/unsplash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [pins, setNewPins] = useState([]);
@@ -14,6 +14,33 @@ function App() {
       },
     });
   };
+
+  const getNewPins = () => {
+    let promises = [];
+    let pinData = [];
+
+    let pins = ["ocean", "husky", "dogs", "tech", "arcade, bali"];
+
+    pins.forEach((pinTerm) => {
+      promises.push(
+        getImages(pinTerm).then((res) => {
+          let results = res.data.results;
+
+          pinData = pinData.concat(results);
+          pinData.sort(function (a, b) {
+            return 0.5 - Math.random();
+          });
+        })
+      );
+    });
+    Promise.all(promises).then(() => {
+      setNewPins(pinData);
+    });
+  };
+
+  useEffect(() => {
+    getNewPins();
+  }, []);
 
   const onSearchSubmit = (term) => {
     console.log("On search submit", term);
@@ -27,8 +54,6 @@ function App() {
       setNewPins(newPins);
     });
   };
-
-  // onSearchSubmit("bali");
 
   return (
     <div className="app">
