@@ -23,15 +23,12 @@ export default MainBoard;
 const Wrapper = styled.div`
   display: flex;
   height: 100%;
-  width: 100%;
   margin: 50px;
   justify-content: center;
 `;
 
 const Container = styled.div`
-  column-count: 5;
-  column-gap: 10px;
+  column-gap: 15px;
   margin: 0 auto;
   height: 100%;
-  max-width: 1260px;
 `;
